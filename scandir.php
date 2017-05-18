@@ -42,11 +42,14 @@ foreach ($scanned as $key => $value) {
 					end($csv_line);
 					$record .= ($i != key($csv_line)) ? "'".$csv_line[$i]."'," : "'".$csv_line[$i]."'";
 				}
-				$query = "insert into report_master values (".$record.")";
+				$query = "insert into report_master (".$kolom.") values (".$record.")";
 				$sql = mysqli_query($conn,$query);
-				if($sql)
+				if($sql){
 					$count ++;
 					echo $count." record telah diinput\n";
+				}else{
+					echo mysqli_error($conn);
+				}
 				$record = "";
 
 				//echo "</tr>";
